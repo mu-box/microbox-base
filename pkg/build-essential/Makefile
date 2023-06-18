@@ -3,7 +3,7 @@
 
 DISTNAME=	build-essential-1.1
 CATEGORIES=	devel meta-pkgs
-MASTER_SITES=	# empty
+MAIN_SITES=	# empty
 
 MAINTAINER=	jperkin@joyent.com
 HOMEPAGE=	http://www.joyent.com/

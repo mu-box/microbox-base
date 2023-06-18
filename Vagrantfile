@@ -23,20 +23,20 @@ Vagrant.configure('2') do |config|
     smartos.zone.disk_size = 20
   end
 
-  nanobox_user = ENV["NANOBOX_USER"]
-  nanobox_project = ENV["NANOBOX_PROJECT"] || File.basename(File.dirname(__FILE__))
-  nanobox_secret = ENV["NANOBOX_#{nanobox_user.upcase}_#{nanobox_project.upcase}_SECRET"]
+  microbox_user = ENV["MICROBOX_USER"]
+  microbox_project = ENV["MICROBOX_PROJECT"] || File.basename(File.dirname(__FILE__))
+  microbox_secret = ENV["MICROBOX_#{microbox_user.upcase}_#{microbox_project.upcase}_SECRET"]
 
   config.vm.synced_folder "../distfiles", "/content/distfiles", type: "nfs"
   config.vm.synced_folder "../packages", "/content/packages", type: "nfs"
   config.vm.synced_folder "../pkgsrc-lite", "/content/pkgsrc", type: "nfs"
-  config.vm.synced_folder "./pkg", "/content/pkgsrc/#{nanobox_project}", type: "nfs"
+  config.vm.synced_folder "./pkg", "/content/pkgsrc/#{microbox_project}", type: "nfs"
 
   $script = <<-SCRIPT
   echo # Vagrant environment variables > /etc/profile.d/vagrant.sh
-  echo export NANOBOX_USER=#{nanobox_user} >> /etc/profile.d/vagrant.sh
-  echo export NANOBOX_PROJECT=#{nanobox_project} >> /etc/profile.d/vagrant.sh
-  echo export NANOBOX_SECRET=#{nanobox_secret} >> /etc/profile.d/vagrant.sh
+  echo export MICROBOX_USER=#{microbox_user} >> /etc/profile.d/vagrant.sh
+  echo export MICROBOX_PROJECT=#{microbox_project} >> /etc/profile.d/vagrant.sh
+  echo export MICROBOX_SECRET=#{microbox_secret} >> /etc/profile.d/vagrant.sh
   echo export PATH=/data/bin:/data/sbin:/data/gcc49/bin:/data/gnu/bin:$PATH >> /etc/profile.d/vagrant.sh
   echo umask 022 >> /etc/profile.d/vagrant.sh
   chmod +x /etc/profile.d/vagrant.sh
